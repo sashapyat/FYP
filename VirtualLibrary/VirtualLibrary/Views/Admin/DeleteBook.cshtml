@@ -1,0 +1,34 @@
+﻿@model VirtualLibrary.Models.BooksModel
+
+@{
+    ViewData["Title"] = "Delete Book";
+}
+<br />
+
+<div class="row" id="BookDetailsCard">
+    <div class="card">
+        <img src="~/images/bookCovers/@Html.DisplayFor(model => model.BookCoverUrl)" class="singleBookImg" alt="" />
+        <div class="card-body">
+            <h4 class="card-title" id="FailedLoginMsg">Are you sure you want to delete this book?</h4><hr>
+            <h5 class="card-text">@Html.DisplayFor(model => model.BookTitle)</h5><br />
+            <h6 class="card-text">@Html.DisplayFor(model => model.AuthorFirstName) @Html.DisplayFor(model => model.AuthorLastName)</h6>
+            <br />
+            <h6 class="card-text">Summary:</h6>
+            <div class="summaryDiv"><p class="card-text summary">@Html.DisplayFor(model => model.Summary)</p></div>
+            <p class="card-text">
+                @foreach (var g in Model.Genres)
+                {
+                    <div class="btn genres">@g.GenreName </div>
+                }
+            </p>
+            <p class="card-text">Publication Year: @Html.DisplayFor(model => model.PublicationYear, "{0: yyyy}")</p>
+            <br />
+            <form method="post" id="ListsCards">
+                <input type="hidden" value="@Model.BookId" />
+                <button type="submit" class="readBtn text-white">Confirm</button>
+            </form>
+            <a class="btn readBtn text-white" onclick="location.href='@Url.Action("BookDetails", "Book", new {id = Model.BookId})'">Cancel</a>
+
+        </div>
+    </div>
+</div>

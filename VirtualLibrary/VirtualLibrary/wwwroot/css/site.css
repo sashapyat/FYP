@@ -1,0 +1,448 @@
+/*
+    source form colour palette: https://i.graphicmama.com/blog/wp-content/uploads/2019/03/08104459/Inspiring-Website-Color-Schemes-colorful-pastel-colors-website.png
+*/
+:root {
+    --grey: #ebe8e7;
+    --red: #ea7186;
+    --yellow: #f2c76e;
+    --dark-purple: #7a77b9;
+    --light-purple: #bd9dea;
+    --green: #DFF0D8;
+}
+
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+  background-color: var(--grey);
+}
+
+.navbar {
+    background-color: var(--dark-purple);
+    color: var(--light-purple);
+}
+
+.navbar-brand {
+    color: var(--light-purple);
+}
+
+.nav-link:hover, .navbar-brand:hover {
+    color: var(--light-purple);
+}
+
+input.parsley-success {
+    color: #468847;
+    background-color: var(--green);
+    border: 1px solid #D6E9C6;
+}
+
+input.parsley-error {
+    color: #B94A48;
+    background-color: #F2DEDE;
+    border: 1px solid #EED3D7;
+}
+
+.parsley-errors-list {
+    margin: 2px 0 3px;
+    padding: 0;
+    list-style-type: none;
+    font-size: 0.9em;
+    line-height: 0.9em;
+    opacity: 0;
+    color: #B94A48;
+    transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    -moz-transition: all .3s ease-in;
+    -webkit-transition: all .3s ease-in;
+}
+
+.parsley-errors-list.filled {
+    opacity: 1;
+}
+
+#RegisterForm {
+    margin-left: auto;
+    margin-right: auto;
+    width: 65%;
+    display: inline-block;
+    text-align: center;
+    background-color: var(--grey);
+}
+
+.form-container {
+    display: block;
+    text-align: center;
+}
+
+#FailedLoginMsg {
+    color: #ff0000;
+    text-align:center;
+}
+
+#SuccessLoginMsg {
+    color: #50C878;
+    text-align: center;
+}
+
+#loginForm {
+    margin-left: auto;
+    margin-right: auto;
+    width: 65%;
+    display: inline-block;
+    text-align: center;
+    background-color: var(--grey);
+}
+
+.submitBtn {
+    background-color: var(--dark-purple);
+    color: white;
+}
+
+.text-dark-purple{
+    color: var(--dark-purple);
+}
+
+.field-validation-error {
+    color: #F34213;
+}
+
+#BookCards {
+    background-color: var(--grey);
+    padding: 2px 16px;
+}
+
+#BookCards .card {
+    background-color: var(--grey);
+    box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+    transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+    border-radius: 10px;
+    flex-direction: row;
+    align-items: center;
+    height: 30em;
+}
+
+#BookCards .card-body {
+    padding: 10px 50px;
+}
+
+#BookCards .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+
+@media(max-width: 990px) {
+    .card {
+        margin: 20px;
+    }
+}
+
+.summaryDiv {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.genres {
+    cursor: context-menu;
+    border-radius: 10px;
+    background-color: var(--yellow);
+    padding: 2px 2px 2px 2px;
+    color: white;
+    margin: 1px 1px 1px 1px;
+}
+
+.genres:hover{
+    color:white;
+}
+
+.heartImg {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 90;
+}
+
+.bookImg {
+    width: 100%;
+    height: 100%;
+}
+
+.viewBookBtn {
+    width: 35%;
+    width: 50em;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: calc(0.25rem - 1px);
+    cursor: pointer;
+    padding: 0px 0px 0px 0px;
+    border: none;
+    outline: none;
+    background: none;
+}
+
+#BookDetailsCard {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    background-color: var(--grey);
+    padding: 2px 40px;
+    border-radius: 25px;
+    align-items: center;
+}
+
+#BookDetailsCard .card {
+    background-color: var(--grey);
+    box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+    transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+    border-radius: 10px;
+    flex-direction: row;
+    align-items: center;
+    padding: 2px 40px;
+}
+
+#BookDetailsCard .card-body {
+    padding: 25px 80px;
+}
+
+.singleBookImg {
+    width: 20em;
+    height: 25em;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: calc(0.25rem - 1px);
+}
+
+.showMore{
+    cursor: pointer;
+}
+
+.filterGenres {
+    text-align: center;
+}
+
+.wantToReadBtn, .readBtn {
+    border-radius: 10px;
+    background-color: var(--red);
+    padding: 4px 4px 4px 4px;
+    color: white;
+    margin: 10px 10px 10px 10px;
+    float: right;
+}
+
+.listsBookImg{
+    height:10em;
+    width:6em;
+    cursor:pointer;
+}
+
+#ListsCards {
+    background-color: var(--grey);
+    padding: 2px 16px;
+}
+
+#ListsCards .card {
+    background-color: var(--grey);
+    box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+    transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+    border-radius: 10px;
+    flex-direction: row;
+    align-items: center;
+    height: 17em;
+    width: 10em;
+    padding: 20px 10px;
+    text-align:center;
+}
+
+#ListsCards .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+
+.listsBookImgBtn {
+    border-top-right-radius: 0;
+    border-bottom-left-radius: calc(0.25rem - 1px);
+    cursor: pointer;
+    padding: 0px 0px 0px 0px;
+    border: none;
+    outline: none;
+    background: none;
+}
+
+#ForgotPasswordForm {
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    display: inline-block;
+    text-align: center;
+    background-color: var(--grey);
+}
+
+.forgotPasswordAlert {
+    width: 40%;
+    text-align: center;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    background-color: var(--green);
+}
+
+#readBookModal .modal-content {
+    height: 670px;
+    width: 1100px;
+}
+
+#readBookModal .modal-body, .bookFile {
+    height: 500px;
+    width: 1100px;
+}
+
+#wrapper {
+    height: 505px;
+    width: 1050px;
+    margin-top: -505px;
+    cursor: not-allowed;
+    position: relative;
+    z-index: 999;
+}
+
+.modalBtn {
+    background-color: var(--light-purple);
+    color: white;
+}
+
+#AdminCards {
+    background-color: var(--grey);
+    padding: 2px 16px;
+}
+
+#AdminCards .card {
+    background-color: var(--light-purple);
+    box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+    transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+    border-radius: 10px;
+    padding: 2px 40px;
+    cursor: pointer;
+    height: 10em;
+    text-align: center;
+}
+
+#AdminCards .card-body {
+    display: flex;
+    flex-direction: column
+}
+
+#AdminCards .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+
+.adminBtn {
+    background-color: var(--yellow);
+}
+
+#AdminUserTable {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#AdminUserTable td, #AdminUserTable th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#AdminUserTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#AdminUserTable tr:hover {
+    background-color: #ddd;
+}
+
+#AdminUserTable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: var(--light-purple);
+    color: white;
+}
+
+#MembershipCard {
+    background-color: var(--grey);
+    padding: 2px 16px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 65%;
+}
+
+#MembershipCard .card {
+    background-color: var(--grey);
+    box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+    transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+    border-radius: 10px;
+    align-items: center;
+    text-align: center;
+}
+
+#MembershipTable {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#MembershipTable td, #MembershipTable th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#MembershipTable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #f2f2f2;
+}
+
+.endBtn {
+    border-radius: 10px;
+    background-color: var(--red);
+    padding: 4px 4px 4px 4px;
+    color: white;
+    margin: 10px 10px 10px 10px;
+}
+
+.editListBtn {
+    border-radius: 10px;
+    background-color: var(--red);
+    padding: 4px 4px 4px 4px;
+    color: white;
+    margin: 10px 10px 10px 10px;
+    width: 90px;
+}
+
+.editListSubmitBtn {
+    border-radius: 10px;
+    border:none;
+    background-color: var(--red);
+    padding: 4px 4px 4px 4px;
+    color: white;
+    margin: 10px 10px 10px 10px;
+    width: 180px;
+    height: 40px;
+}
+
+.confirmCancelDiv {
+    text-align: center;
+}
+

@@ -1,0 +1,50 @@
+﻿@using Core.Persistence.Context
+@using Microsoft.AspNetCore.Identity
+@model VirtualLibrary.Models.UserModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="form-container col-12 col-xl-8 offset-xl-2">
+    <form method="post" data-parsley-validate="" id="RegisterForm" class="card p-3 ">
+
+        <h1 class="display-5 text-center">Register</h1>
+        <hr />
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" class="form-control" asp-for="FirstName" id="FirstName" placeholder="Enter first name" data-parsley-length="[3, 128]" data-parsley-trigger="blur" data-parsley-required>
+            <label asp-for="FirstName">First Name</label>
+        </div>
+
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" class="form-control" asp-for="LastName" id="LastName" placeholder="Enter last name" data-parsley-length="[3, 128]" data-parsley-trigger="blur" data-parsley-required>
+            <label asp-for="LastName">Last Name</label>
+        </div>
+
+        <div class="form-floating mb-3 mt-3">
+            <input type="email" class="form-control" asp-for="Email" id="Email" placeholder="Enter email" data-parsley-trigger="blur" data-parsley-required><span id="message"></span>
+            <label asp-for="Email">Email</label>
+        </div>
+
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" class="form-control" asp-for="Username" id="Username" placeholder="Enter username" data-parsley-length="[6, 128]" data-parsley-trigger="blur" data-parsley-required>
+            <label asp-for="Username">Username</label>
+        </div>
+
+        <div class="form-floating mt-3 mb-3">
+            <input type="password" class="form-control" asp-for="Password" id="password" placeholder="Enter password" minlength="8" data-parsley-equalto="#confirmPassword" data-parsley-trigger="blur" data-parsley-required>
+            <label asp-for="Password">Password</label>
+        </div>
+
+        <div class="form-floating mt-3 mb-3">
+            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm password" name="confirmPassword" minlength="8" data-parsley-equalto="#password" data-parsley-trigger="blur" data-parsley-required>
+            <label for="confirmPassword">Confirm Password</label>
+        </div>
+
+        <br />
+        <button type="submit" class="btn col-12 submitBtn">Register</button>
+    </form>
+</div>
+
+@section Scripts {
+        <script src="~/js/Views/Account/Register.js"></script>
+}

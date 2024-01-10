@@ -1,0 +1,51 @@
+﻿@model VirtualLibrary.Models.UsersAndMembersModel
+@{
+    ViewData["Title"] = "User Administration";
+}
+
+<br />
+<h1 class="display-6 text-center">User Administration</h1>
+<br />
+
+
+<table id="AdminUserTable">
+  <tr>
+    <th>User ID</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Username</th>
+    <th>Email</th>
+    <th>Role</th>
+    <th>Total Books Read</th>
+    <th></th>
+  </tr>
+
+    @foreach(var u in Model.Members)
+    {
+        <tr>
+            <td>@u.UserId</td>
+            <td>@u.FirstName</td>
+            <td>@u.LastName</td>
+            <td>@u.Username</td>
+            <td>@u.Email</td>
+            <td>@u.Role</td>
+            <td>@u.TotalBooks</td>
+            <td><a class="btn genres" onclick="location.href='@Url.Action("UserDetails", "Admin", new {id = @u.UserId})'">Details</a></td>
+       </tr>
+    }
+    @foreach (var u in Model.RegisteredUsers)
+    {
+          <tr>
+                <td>@u.UserId</td>
+                <td>@u.FirstName</td>
+                <td>@u.LastName</td>
+                <td>@u.Username</td>
+                <td>@u.Email</td>
+                <td>@u.Role</td>
+                <td>@u.TotalBooks</td>
+            <td><a class="btn genres" onclick="location.href='@Url.Action("UserDetails", "Admin", new {id = @u.UserId})'">Details</a></td>
+            </tr>
+    }
+
+  
+</table>

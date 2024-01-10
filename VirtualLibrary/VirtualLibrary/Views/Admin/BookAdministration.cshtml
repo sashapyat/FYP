@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Book Administration";
+}
+
+
+<br />
+<h1 class="text-center display-6">Book Administration</h1>
+<br />
+
+<div class="container">
+    <div class="row g-3 justify-content-md-center" id="AdminCards">
+
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Add a New Book</h5>
+                    <br />
+                    <a class="btn adminBtn text-white" asp-area="" asp-controller="Admin" asp-action="AddBook">>>></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">View All Books</h5>
+                    <br />
+                    <a class="btn adminBtn text-white" asp-area="" asp-controller="Book" asp-action="ExploreBooks">>>></a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

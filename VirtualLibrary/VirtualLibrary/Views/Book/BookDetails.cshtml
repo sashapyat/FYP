@@ -1,0 +1,124 @@
+﻿@model VirtualLibrary.Models.BooksModel
+@inject SignInManager<IdentityUser> signInManager;
+@inject UserManager<IdentityUser> userManager;
+@{
+    ViewData["Title"] = "Book Details";
+}
+
+@*
+    following link helped display pdf in bootstrap modal: https://www.youtube.com/watch?v=aUdnaAsq1ec
+*@
+
+<div id="readBookModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="readBookModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="readBookModalLabel">@Html.DisplayFor(model => model.BookTitle)</h4>
+                <button type="button" class="close btn btn-default modalXBtn" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+
+                <iframe style="" src="/bookPdf/@Html.DisplayFor(model => model.BookPdfUrl)#toolbar=0" class="w-100 bookFile"></iframe>
+                <div id="wrapper"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="close btn modalBtn" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<br>
+@if (ViewBag.Message == "You already have this book saved in this list" || ViewBag.Message == "You already have this book saved in \"Already read\"")
+{
+    <p id="FailedLoginMsg">@ViewBag.Message</p>
+}
+else if (ViewBag.Message == "Book has been saved in list")
+{
+    <p id="SuccessLoginMsg">@ViewBag.Message</p>
+}
+else if (ViewBag.Message == "You have reached the monthly limit")
+{
+    <p id="FailedLoginMsg">@ViewBag.Message</p>
+}
+
+<div class="row" id="BookDetailsCard">
+    <div class="card">
+
+        <img src="~/images/bookCovers/@Html.DisplayFor(model => model.BookCoverUrl)" class="singleBookImg" alt="" />
+            
+
+        <div class="card-body">
+            <h4 class="card-title">@Html.DisplayFor(model => model.BookTitle)</h4><hr>
+            <h5 class="card-text">@Html.DisplayFor(model => model.AuthorFirstName) @Html.DisplayFor(model => model.AuthorLastName)</h5>
+            <br />
+            <h6 class="card-text">Summary:</h6>
+            <div class="summaryDiv"><p class="card-text summary">@Html.DisplayFor(model => model.Summary)</p></div>
+            <p class="card-text">
+                @foreach (var g in Model.Genres)
+                {
+                    <div class="btn genres">@g.GenreName </div>
+                }
+            </p>
+                <p class="card-text">Publication Year: @Html.DisplayFor(model => model.PublicationYear, "{0: yyyy}")</p>
+            @if (signInManager.IsSignedIn(User))
+            {
+                    <br />
+                @if (User.IsInRole("RegisteredUser"))
+                {
+                    <a class="btn readBtn text-white" asp-action="MembershipDetails" asp-controller="Member">Read Now &#x2192;</a>
+                }
+                @if (User.IsInRole("PaidMember"))
+                {
+                    @using (Html.BeginForm("ReadBook", "Book", FormMethod.Post))
+                    {
+                        <input type="hidden" asp-for="BookId" id="BookId"></input>
+                        <button type="submit" class="btn readBtn text-white" data-toggle="modal" data-target="readBookModal">Read Now &#x2192;</button>
+                    
+                    }
+                }
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <a class="btn readBtn" onclick="location.href='@Url.Action("EditBook", "Admin", new {id = Model.BookId})'">Edit Book</a>
+                    <a class="btn readBtn" onclick="location.href='@Url.Action("DeleteBook", "Admin", new {id = Model.BookId})'">Delete Book</a>
+                }
+                else
+                {
+                    @using (Html.BeginForm("AddToList", "Book", FormMethod.Post))
+                    {
+                        <input type="hidden" asp-for="BookId" id="BookId"></input>
+                        <button type="submit" class="btn wantToReadBtn text-white">Add to 'Want to read' List &#x2192;</button>
+
+                    }
+                }
+
+                <br />
+                    
+            }
+
+        </div>
+    </div>
+    
+
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+
+        function openModal(){
+            $('#readBookModal').modal('show');
+        }
+    
+        $(document).ready(function () {
+            var msg = "@TempData["openModal"]";
+            if(msg)
+                openModal();
+        })
+
+    
+    </script>
+}

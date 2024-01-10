@@ -1,0 +1,43 @@
+﻿@model VirtualLibrary.Models.BooksAndGenresModel
+@inject SignInManager<IdentityUser> signInManager;
+@{
+    ViewData["Title"] = "Explore";
+}
+
+
+
+<h1 class="display-5 text-center">Explore Books</h1><br />
+<p id="FailedLoginMsg">@ViewBag.Message</p>
+<form method="post" asp-controller="Book" asp-action="ExploreBooks" class="filterGenres">
+    <select id="genreDropDownMenuButton" name="GenreId" asp-items="Model.GenresList">
+        <option value="0">Filter By Genre</option>
+    </select>
+    <input type="submit" value="Search" />
+</form>
+<br />
+<div class="row g-3" id="BookCards">
+    
+        @foreach (var item in Model.Books)
+        {
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card">
+                
+                <a class="btn viewBookBtn" onclick="location.href='@Url.Action("BookDetails", "Book", new {id = @item.BookId})'"><img src="~/images/bookCovers/@item.BookCoverUrl" class="bookImg" alt="" /></a>
+                
+                <div class="card-body">
+                        <h5 class="card-title">@item.BookTitle</h5><hr>
+                        <h6 class="card-text">@item.AuthorFirstName @item.AuthorLastName</h6>
+                        <div class="summaryDiv"><p class="card-text summary">@item.Summary.Substring(0, 100) <a onclick="location.href='@Url.Action("BookDetails", "Book", new {id = @item.BookId})'" class="text-black showMore">...show more</a></p></div>
+                        <p class="card-text">
+                            @foreach (var g in item.Genres)
+                            {
+                                    <div class="btn genres">@g.GenreName </div>
+                            }
+                        </p>
+                            
+                </div>
+            </div>
+        </div>
+        }
+    
+</div>

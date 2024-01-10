@@ -1,0 +1,68 @@
+﻿@model VirtualLibrary.Models.BooksModel
+@{
+    ViewData["Title"] = "Edit List";
+}
+
+<h1 class="display-5 text-center">@ViewBag.Message</h1>
+
+<br />
+<form method="post" class="row " id="ListsCards">
+    @if (ViewBag.ID == 1)
+    {
+        @foreach (var b in Model.WantToRead)
+        {
+            <div class="col-12 col-md-2">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-check">
+                            <input asp-for="@b.IsSelected" class="form-check-input" type="checkbox" value="@b.BookId" name="BooksSelected" id="checkbox_@b.BookId">
+                        </div>
+                        <img src="~/images/bookCovers/@b.BookCoverUrl" class="listsBookImg" alt="" />
+                        <h6 class="card-title">@b.BookTitle</h6>
+                    </div>
+                </div>
+            </div>
+        }
+        <br />
+        <button type="submit" class="editListSubmitBtn text-white">Remove from list</button>
+    }
+    else if (ViewBag.ID == 2)
+    {
+        
+        @foreach (var b in Model.CurrentlyReading)
+        {
+            <div class="col-12 col-md-2">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-check">
+                            <input asp-for="@b.IsSelected" class="form-check-input" type="checkbox" value="@b.BookId" name="BooksSelected" id="checkbox_@b.BookId">
+                        </div>
+                        <img src="~/images/bookCovers/@b.BookCoverUrl" class="listsBookImg" alt="" />
+                        <h6 class="card-title">@b.BookTitle</h6>
+                    </div>
+                </div>
+            </div>
+        }
+        <br />
+        <button type="submit" class="editListSubmitBtn text-white">Move to Already Read</button>
+
+    }else if (ViewBag.ID == 3)
+    {
+        @foreach (var b in Model.AlreadyRead)
+        {
+            <div class="col-12 col-md-2">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-check">
+                            <input asp-for="@b.IsSelected" class="form-check-input" type="checkbox" value="@b.BookId" name="BooksSelected" id="checkbox_@b.BookId">
+                        </div>
+                        <img src="~/images/bookCovers/@b.BookCoverUrl" class="listsBookImg" alt="" />
+                        <h6 class="card-title">@b.BookTitle</h6>
+                    </div>
+                </div>
+            </div>
+        }
+        <button type="submit" class="editListSubmitBtn text-white">Remove from list</button>
+    }
+
+</form>

@@ -1,0 +1,128 @@
+﻿@model VirtualLibrary.Models.BooksModel
+@inject SignInManager<IdentityUser> signInManager;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (signInManager.IsSignedIn(User))
+{
+    @if (User.IsInRole("Admin"))
+    {
+        <br />
+        <h1 class="display-6 text-center">Admin</h1>
+        <br />
+        <p id="SuccessLoginMsg">@ViewBag.Message</p>
+    }
+    else
+    {
+        <p id="FailedLoginMsg">@ViewBag.Message</p>
+        
+        <br />
+        <h1 class="display-6">
+            Want to Read @if (Model.WantToRead.Count().Equals(0) || Model.WantToRead == null) { }else
+            {
+                <a class="btn editListBtn text-white" onclick="location.href='@Url.Action("EditList", "Book", new {id = 1})'">Edit List</a>
+            }
+        </h1>
+        <div class="row " id="ListsCards">
+
+            @if (Model.WantToRead.Count().Equals(0) || Model.WantToRead == null)
+            {
+                <br />
+                <h6>List is empty. <a onclick="location.href='@Url.Action("ExploreBooks", "Book")'" class="text-black showMore">Explore books now!</a></h6>
+            }
+            else
+            {
+                @foreach (var b in Model.WantToRead)
+                {
+                    <div class="col-12 col-md-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <a class="btn listsBookImgBtn" onclick="location.href='@Url.Action("BookDetails", "Book", new {id = @b.BookId})'"><img src="~/images/bookCovers/@b.BookCoverUrl" class="listsBookImg" alt="" /></a>
+                                <h6 class="card-title">@b.BookTitle</h6>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+
+        </div>
+
+
+        <hr />
+        <br />
+        <h1 class="display-6">
+            Currently reading @if (Model.CurrentlyReading.Count().Equals(0) || Model.CurrentlyReading == null) { }else
+            {
+                <a class="btn editListBtn text-white" onclick="location.href='@Url.Action("EditList", "Book", new {id = 2})'">Edit List</a>
+            }
+        </h1>
+
+        <div class="row " id="ListsCards">
+
+            @if (Model.CurrentlyReading.Count().Equals(0) || Model.CurrentlyReading == null)
+            {
+                <br />
+                <h6>List is empty. <a onclick="location.href='@Url.Action("ExploreBooks", "Book")'" class="text-black showMore">Explore books now!</a></h6>
+            }
+            else
+            {
+                
+                @foreach (var b in Model.CurrentlyReading)
+                {
+                    <div class="col-12 col-md-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <a class="btn listsBookImgBtn" onclick="location.href='@Url.Action("BookDetails", "Book", new {id = @b.BookId})'"><img src="~/images/bookCovers/@b.BookCoverUrl" class="listsBookImg" alt="" /></a>
+                                <h6 class="card-title">@b.BookTitle</h6>
+                            </div>
+                            
+                        </div>
+                    </div>
+                }
+            }
+
+        </div>
+
+
+
+        <hr />
+        <br />
+        <h1 class="display-6">
+            Already Read @if (Model.AlreadyRead.Count().Equals(0) || Model.AlreadyRead == null) { }else
+            {
+                <a class="btn editListBtn text-white" onclick="location.href='@Url.Action("EditList", "Book", new {id = 3})'">Edit List</a>
+            }
+        </h1>
+        <div class="row " id="ListsCards">
+
+            @if (Model.AlreadyRead.Count().Equals(0) || Model.AlreadyRead == null)
+            {
+                <br />
+                <h6>List is empty. <a onclick="location.href='@Url.Action("ExploreBooks", "Book")'" class="text-black showMore">Explore books now!</a></h6>
+            }
+            else
+            {
+                @foreach (var b in Model.AlreadyRead)
+                {
+                    <div class="col-12 col-md-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <a class="btn listsBookImgBtn" onclick="location.href='@Url.Action("BookDetails", "Book", new {id = @b.BookId})'"><img src="~/images/bookCovers/@b.BookCoverUrl" class="listsBookImg" alt="" /></a>
+                                <h6 class="card-title">@b.BookTitle</h6>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    }
+}
+else
+{
+    <div class="text-center">
+        <h1 class="display-4">Welcome to the Virtual Library</h1>
+        <p>Please log in or register</p>
+        <p id="SuccessLoginMsg">@ViewBag.Message</p>
+    </div>
+}

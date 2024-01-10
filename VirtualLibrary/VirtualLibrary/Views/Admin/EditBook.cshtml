@@ -1,0 +1,92 @@
+﻿@model VirtualLibrary.Models.BooksGenresAuthorsModel
+@{
+    ViewData["Title"] = "Edit Book";
+}
+
+<br />
+<p id="FailedLoginMsg">@ViewBag.Message</p>
+
+<div class="form-container col-12 col-xl-8 offset-xl-2">
+    <form method="post" data-parsley-validate="" id="RegisterForm" class="card p-3" asp-controller="Admin" asp-action="EditBook" enctype="multipart/form-data">
+
+        <h1 class="display-5 text-center">Edit Book</h1>
+        <hr />
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" class="form-control" asp-for="Book.BookId" value="@Model.Book.BookId" id="BookId" readonly>
+            <label asp-for="Book.BookId">Book Id</label>
+        </div>
+
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" class="form-control" asp-for="Book.BookTitle" value="@Model.Book.BookTitle" id="BookTitle" placeholder="Enter book title" data-parsley-trigger="blur" data-parsley-required>
+            <label asp-for="Book.BookTitle">Title</label>
+        </div>
+
+        <div class="form-floating mb-3 mt-3">
+            <input type="number" min="1800" max="2100" class="form-control" value="@Model.Book.PublicationYear.Year" asp-for="Book.PublicationYear" name="PublicationYear" id="PublicationYear" placeholder="Enter publication year" data-parsley-trigger="blur" data-parsley-required>
+            <label asp-for="Book.PublicationYear">Publication Year</label>
+        </div>
+
+        <div class="form-floating mb-3 mt-3">
+            <label asp-for="Book.Summary">Summary</label>
+            <textarea asp-for="Book.Summary" style="height: 180px; width: 280px;" value="@Model.Book.Summary"></textarea>
+
+        </div>
+        <hr />
+
+        <p class="text-center">Select an existing author or create a new author entry</p>
+
+        @*drop down list of existing authors and add option to enter new author*@
+        @*code for drop down lists from: https://www.aspsnippets.com/Articles/ASPNet-Core-MVC-Implement-Searchable-DropDownList-using-jQuery.aspx*@
+
+        <div class="form-floating mb-3 mt-3">
+            <select id="genreDropDownMenuButton" name="AuthorId" asp-items="Model.AuthorsList">
+                <option value="@Model.Author.AuthorId">@Model.Author.AuthorFirstName @Model.Author.AuthorLastName</option>
+            </select>
+        </div>
+
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" class="form-control" asp-for="Book.AuthorFirstName" value="" id="AuthorFirstName" placeholder="Enter author first name" data-parsley-trigger="blur"></span>
+            <label asp-for="Book.AuthorFirstName">Author First Name</label>
+        </div>
+
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" class="form-control" asp-for="Book.AuthorLastName" value="" id="AuthorLastName" placeholder="Enter author last name" data-parsley-trigger="blur"></span>
+            <label asp-for="Book.AuthorLastName">Author Last Name</label>
+        </div>
+
+        <hr />
+
+        @*checkbox list of genres*@
+        @foreach (var genre in Model.GenresList)
+        {
+            <div class="form-check">
+                <input asp-for="@genre.IsSelected" class="form-check-input" type="checkbox" value="@genre.GenreId" name="GenresSelected" id="checkbox_@genre.GenreId" data-parsley-required>
+                <label class="form-check-label" asp-for="@genre.IsSelected">@genre.GenreName</label>
+            </div>
+        }
+
+        <hr />
+
+        @*upload image for book cover*@
+        <div class="listsBookImgBtn">
+            <img src="~/images/bookCovers/@Model.Book.BookCoverUrl" />
+        </div>
+
+        <div class="form-floating mb-3 mt-3">
+            <input asp-for="Book.BookCover" class="form-control" type="file" id="BookCover" name="BookCover" accept=".jpg, .jpeg, .png" /><br />
+            <label asp-for="Book.BookCover">Change Book Cover Image?</label>
+        </div>
+
+
+        @*upload pdf for book*@
+        <div class="form-floating mb-3 mt-3">
+            <input asp-for="Book.BookPdf" class="form-control" type="file" value="@Model.Book.BookPdfUrl" id="BookPdf" name="BookPdf" accept=".pdf" /><br />
+            <label asp-for="Book.BookPdf">Change Book PDF File?</label>
+        </div>
+
+
+
+        <br />
+        <button type="submit" class="btn col-12 submitBtn">Update Book</button>
+    </form>
+</div>
